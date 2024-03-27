@@ -1,5 +1,4 @@
 BINARY_NAME=myapp
-AAA=""
 
 build:
 	go build -o ${BINARY_NAME} main.go needless_words_dictionary.go stemmer.go
