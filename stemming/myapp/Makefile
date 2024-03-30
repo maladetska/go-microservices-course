@@ -1,7 +1,7 @@
 BINARY_NAME=myapp
 
 build:
-	go build -o ${BINARY_NAME} main.go needless_words_dictionary.go stemmer.go
+	go build -o ${BINARY_NAME}
 
 clean-build:
 	go clean
@@ -12,9 +12,9 @@ ifneq ("$(WORDS)", "")
 endif
 
 compile:
-	GOARCH=amd64 GOOS=darwin go build -o ${BINARY_NAME}-darwin main.go needless_words_dictionary.go stemmer.go
-	GOARCH=amd64 GOOS=linux go build -o ${BINARY_NAME}-linux main.go needless_words_dictionary.go stemmer.go
-	GOARCH=amd64 GOOS=windows go build -o ${BINARY_NAME}-windows main.go needless_words_dictionary.go stemmer.go
+	GOARCH=amd64 GOOS=darwin go build -o ${BINARY_NAME}-darwin
+	GOARCH=amd64 GOOS=linux go build -o ${BINARY_NAME}-linux
+	GOARCH=amd64 GOOS=windows go build -o ${BINARY_NAME}-windows
 
 clean-compile:
 	go clean
