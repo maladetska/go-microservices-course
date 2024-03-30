@@ -3,14 +3,14 @@ package main
 import (
 	"flag"
 	"fmt"
-	"strings"
 )
 
 func main() {
-	textPtr := flag.String("s", "different words", "words for stemming")
+	var text string
+	flag.StringVar(&text, "s", "different words", "words for stemming")
 	flag.Parse()
 
-	var words = strings.Fields(*textPtr)
+	var words = splitWords(text)
 	var stemmedWords = stemming(words)
 
 	PrintResult(stemmedWords.Values())
