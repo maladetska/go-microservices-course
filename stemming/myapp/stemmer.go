@@ -10,9 +10,11 @@ var apostrophe = "'"
 
 func stemming(words []string) *hashset.Set {
 	var stemmedWords = hashset.New()
-	for i := 0; i < len(words); i++ {
-		stemmedWord, err := snowball.Stem(words[i], "english", true)
-		if err == nil && isInvalidWord(stemmedWord) && isWordWithApostropheOk(stemmedWord) {
+	for _, word := range words {
+		stemmedWord, err := snowball.Stem(word, "english", true)
+		if err == nil &&
+			isInvalidWord(stemmedWord) &&
+			isWordWithApostropheAppropriate(stemmedWord) {
 			stemmedWords.Add(stemmedWord)
 		}
 	}
@@ -30,7 +32,7 @@ func isInvalidWord(str string) bool {
 	return true
 }
 
-func isWordWithApostropheOk(str string) bool {
+func isWordWithApostropheAppropriate(str string) bool {
 	if !strings.Contains(str, apostrophe) {
 		return true
 	}
