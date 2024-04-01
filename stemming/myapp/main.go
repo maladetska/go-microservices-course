@@ -13,11 +13,11 @@ func main() {
 	var words = splitWords(text)
 	var stemmedWords = stemming(words)
 
-	PrintResult(stemmedWords.Values())
+	PrintResult(stemmedWords)
 }
 
-func PrintResult(set []interface{}) {
-	for i := range set {
-		fmt.Print(set[i], " ")
+func PrintResult(words []string) {
+	for i := range words {
+		fmt.Print(words[i], " ")
 	}
 }

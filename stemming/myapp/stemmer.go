@@ -1,25 +1,26 @@
 package main
 
 import (
-	"github.com/emirpasic/gods/sets/hashset"
 	"github.com/kljensen/snowball"
 	"strings"
 )
 
+type HashSet map[string]bool
+
 var apostrophe = "'"
 
-func stemming(words []string) *hashset.Set {
-	var stemmedWords = hashset.New()
+func stemming(words []string) []string {
+	var stemmedWords = make(HashSet)
 	for _, word := range words {
 		stemmedWord, err := snowball.Stem(word, "english", true)
 		if err == nil &&
 			isInvalidWord(stemmedWord) &&
 			isWordWithApostropheAppropriate(stemmedWord) {
-			stemmedWords.Add(stemmedWord)
+			stemmedWords[stemmedWord] = true
 		}
 	}
 
-	return stemmedWords
+	return getWordSlice(&stemmedWords)
 }
 
 func isInvalidWord(str string) bool {
@@ -42,4 +43,13 @@ func isWordWithApostropheAppropriate(str string) bool {
 	} else {
 		return true
 	}
+}
+
+func getWordSlice(wordsSet *HashSet) []string {
+	words := make([]string, 0, len(*wordsSet))
+	for k := range *wordsSet {
+		words = append(words, k)
+	}
+
+	return words
 }
