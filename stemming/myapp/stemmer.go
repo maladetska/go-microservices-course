@@ -38,11 +38,8 @@ func isWordWithApostropheAppropriate(str string) bool {
 		return true
 	}
 	words := strings.Split(str, apostrophe)
-	if wordsAfterApostrophe.Contains(words[1]) {
-		return false
-	} else {
-		return true
-	}
+
+	return !wordsAfterApostrophe.Contains(words[1])
 }
 
 func getWordSlice(wordsSet *HashSet) []string {
